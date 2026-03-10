@@ -28,7 +28,7 @@ const values = [
   {
     icon: Shield,
     title: 'Privacy First',
-    description: 'We are GDPR-compliant by design. We will never sell your data or your customers' data. Full stop.',
+    description: "We are GDPR-compliant by design. We will never sell your data or your customers' data. Full stop.",
   },
   {
     icon: TrendingUp,
