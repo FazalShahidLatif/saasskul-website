@@ -1,96 +1,64 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
+import { LegalLayout, LegalSection, LegalContact, LegalLink } from '@/components/legal/LegalLayout'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy — SaaSSkul',
-  description: 'How SaaSSkul collects, uses, and protects your personal information.',
+  description: 'How SaaSSkul collects, uses, and protects your personal data.',
 }
 
 export default function PrivacyPage() {
   return (
-    <LegalPage title="Privacy Policy" updated="March 10, 2026">
-      <Section title="1. Information We Collect">
-        <p>We collect information you provide directly, such as your name, email, and company details when registering or contacting us. We also collect usage data, IP addresses, browser type, and cookies automatically when you use our Service.</p>
-      </Section>
-      <Section title="2. How We Use Your Information">
+    <LegalLayout title="Privacy Policy" updated="March 10, 2026">
+      <p>SaaSSkul ("we", "us", or "our") is committed to protecting your privacy. This Policy explains how we collect, use, and safeguard your information when you use saasskul.com.</p>
+
+      <LegalSection title="1. Information We Collect">
+        <p><strong className="text-gray-800 dark:text-gray-200">You provide directly:</strong> name, email, password, company details, billing info (processed by Paddle), and messages via the contact form.</p>
+        <p><strong className="text-gray-800 dark:text-gray-200">Collected automatically:</strong> IP address, browser type, pages visited, device info, and usage analytics. See our <LegalLink href="/cookies">Cookie Policy</LegalLink>.</p>
+      </LegalSection>
+
+      <LegalSection title="2. How We Use Your Information">
         <ul>
-          <li>Provide, operate, and improve our Service</li>
-          <li>Process transactions and send confirmations</li>
-          <li>Send administrative and marketing communications (opt-out available)</li>
-          <li>Detect, prevent, and address fraud and security issues</li>
+          <li>Provide, operate, and improve the Service</li>
+          <li>Process payments and send billing confirmations</li>
+          <li>Send security alerts, product updates, and support messages</li>
+          <li>Send marketing communications (opt out any time)</li>
+          <li>Personalise your onboarding and dashboard experience</li>
+          <li>Detect and prevent fraud, abuse, and security incidents</li>
           <li>Comply with legal obligations</li>
         </ul>
-      </Section>
-      <Section title="3. Sharing Your Information">
-        <p>We do not sell your personal data. We may share it with trusted service providers (e.g., database, email) bound by confidentiality, in connection with a business transfer, or where required by law.</p>
-      </Section>
-      <Section title="4. Data Retention">
-        <p>We retain your data while your account is active or as needed for the Service. To delete your account or request data removal, email <A href="mailto:privacy@saasskul.com">privacy@saasskul.com</A>.</p>
-      </Section>
-      <Section title="5. Data Security">
-        <p>We use SSL/TLS encryption, hashed passwords, and restricted access controls to protect your information. No method of online transmission is 100% secure, but we follow industry best practices.</p>
-      </Section>
-      <Section title="6. Your Rights">
-        <p>You may have the right to access, correct, delete, or export your data. You may also withdraw consent or object to processing. Contact us at <A href="mailto:privacy@saasskul.com">privacy@saasskul.com</A> or see our <Link href="/gdpr" className="text-brand-500 hover:underline">GDPR Policy</Link> for details.</p>
-      </Section>
-      <Section title="7. Children's Privacy">
-        <p>Our Service is not intended for users under 16. We do not knowingly collect data from children. If you believe a child has provided us information, please contact us for immediate removal.</p>
-      </Section>
-      <Section title="8. Changes to This Policy">
-        <p>We may update this policy periodically. We will notify you of material changes via email or a prominent notice on our website, with the updated date shown above.</p>
-      </Section>
-      <Section title="9. Contact Us">
-        <Contact />
-      </Section>
-    </LegalPage>
-  )
-}
+      </LegalSection>
 
-// ─── Shared layout helpers ────────────────────────────────────────────────────
+      <LegalSection title="3. Sharing Your Information">
+        <p>We never sell your data. We share it only with trusted service providers (Supabase, Paddle, Anthropic — all bound by DPAs), in a business transfer with advance notice, or when required by law.</p>
+      </LegalSection>
 
-function LegalPage({ title, updated, children }: { title: string; updated: string; children: React.ReactNode }) {
-  return (
-    <div className="min-h-screen bg-white dark:bg-surface-900 pt-28 pb-24">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6">
-        <div className="mb-10">
-          <p className="text-sm font-semibold text-brand-500 uppercase tracking-wider mb-3">Legal</p>
-          <h1 className="font-display text-4xl font-bold text-gray-900 dark:text-white mb-3">{title}</h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Last updated: {updated}</p>
-        </div>
-        <div className="space-y-8 text-gray-600 dark:text-gray-300 text-[15px] leading-relaxed">
-          {children}
-        </div>
-        <div className="mt-12 pt-8 border-t border-gray-100 dark:border-white/6 flex flex-wrap gap-4 text-sm text-gray-400">
-          <Link href="/privacy" className="hover:text-brand-500 transition-colors">Privacy Policy</Link>
-          <Link href="/terms" className="hover:text-brand-500 transition-colors">Terms of Service</Link>
-          <Link href="/cookies" className="hover:text-brand-500 transition-colors">Cookie Policy</Link>
-          <Link href="/gdpr" className="hover:text-brand-500 transition-colors">GDPR</Link>
-          <Link href="/contact" className="hover:text-brand-500 transition-colors">Contact Us</Link>
-        </div>
-      </div>
-    </div>
-  )
-}
+      <LegalSection title="4. Data Retention">
+        <p>Data is retained while your account is active. On deletion, data is removed within 30 days (unless legally required to retain). Request deletion at <LegalLink href="mailto:privacy@saasskul.com">privacy@saasskul.com</LegalLink>.</p>
+      </LegalSection>
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section>
-      <h2 className="font-display text-xl font-bold text-gray-900 dark:text-white mb-3">{title}</h2>
-      <div className="space-y-3 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5">{children}</div>
-    </section>
-  )
-}
+      <LegalSection title="5. Data Security">
+        <p>We use TLS encryption, AES-256 at rest, hashed passwords, and role-based access controls. No online transmission is 100% secure. We will notify you promptly of any breach affecting your data.</p>
+      </LegalSection>
 
-function A({ href, children }: { href: string; children: React.ReactNode }) {
-  return <a href={href} className="text-brand-500 hover:underline">{children}</a>
-}
+      <LegalSection title="6. Your Rights">
+        <p>You have the right to access, correct, delete, export, or restrict your data, and to withdraw consent at any time. See our <LegalLink href="/gdpr">GDPR Policy</LegalLink> for full details. We respond within 30 days.</p>
+      </LegalSection>
 
-function Contact() {
-  return (
-    <div className="p-4 rounded-xl bg-gray-50 dark:bg-white/3 border border-gray-100 dark:border-white/6 space-y-1">
-      <p className="font-semibold text-gray-900 dark:text-white">SaaSSkul</p>
-      <p>Email: <A href="mailto:privacy@saasskul.com">privacy@saasskul.com</A></p>
-      <p>Contact form: <Link href="/contact" className="text-brand-500 hover:underline">saasskul.com/contact</Link></p>
-    </div>
+      <LegalSection title="7. Children's Privacy">
+        <p>Our Service is not directed to anyone under 16. If you believe a child has provided us data, contact us immediately for deletion.</p>
+      </LegalSection>
+
+      <LegalSection title="8. Third-Party Links">
+        <p>We are not responsible for the privacy practices of third-party sites linked from our Service. Please review their policies before sharing personal data.</p>
+      </LegalSection>
+
+      <LegalSection title="9. Changes to This Policy">
+        <p>We will post updates here with a revised date. For material changes we will provide advance email notice. Continued use constitutes acceptance.</p>
+      </LegalSection>
+
+      <LegalSection title="10. Contact Us">
+        <LegalContact email="privacy@saasskul.com" dept="Privacy" />
+      </LegalSection>
+    </LegalLayout>
   )
 }

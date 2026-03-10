@@ -113,7 +113,7 @@ export default function DashboardPage() {
           <div className="lg:col-span-2 bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 overflow-hidden">
             <div className="px-5 py-4 border-b border-gray-50 dark:border-white/4 flex items-center justify-between">
               <h2 className="font-semibold text-gray-900 dark:text-white text-sm">Recent Leads</h2>
-              <Link href="#" className="text-xs text-brand-500 hover:underline flex items-center gap-1">
+              <Link href="/dashboard" className="text-xs text-brand-500 hover:underline flex items-center gap-1">
                 View all <ArrowUpRight className="w-3 h-3" />
               </Link>
             </div>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Zap, Twitter, Linkedin, Github, Mail } from 'lucide-react'
+import { Zap, Twitter, Linkedin, Github, Mail, MapPin, Phone } from 'lucide-react'
 
 const links = {
   Product: [
@@ -23,17 +23,25 @@ const links = {
   Account: [
     { label: 'Sign Up Free', href: '/auth/signup' },
     { label: 'Login', href: '/auth/login' },
-    { label: 'Dashboard', href: '/dashboard' },
     { label: 'Forgot Password', href: '/auth/forgot-password' },
+    { label: 'Dashboard', href: '/dashboard' },
   ],
 }
+
+const socials = [
+  { icon: Twitter, href: 'https://twitter.com/saasskul', label: 'Twitter' },
+  { icon: Linkedin, href: 'https://linkedin.com/company/saasskul', label: 'LinkedIn' },
+  { icon: Github, href: 'https://github.com/FazalShahidLatif/saasskul-website', label: 'GitHub' },
+  { icon: Mail, href: 'mailto:hello@saasskul.com', label: 'Email' },
+]
 
 export default function Footer() {
   return (
     <footer className="border-t border-gray-100 dark:border-white/5 bg-white dark:bg-surface-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
-          {/* Brand */}
+
+          {/* Brand column */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-gradient-to-br from-brand-400 to-cyan-400 rounded-lg flex items-center justify-center">
@@ -44,16 +52,27 @@ export default function Footer() {
                 <span className="text-gray-900 dark:text-white">Skul</span>
               </span>
             </Link>
+
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-5 leading-relaxed max-w-xs">
               AI-powered lead generation that fills your pipeline automatically — so you can focus on closing.
             </p>
+
+            {/* Contact info */}
+            <div className="space-y-2 mb-5">
+              <a href="tel:+923322137898"
+                className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-colors">
+                <Phone className="w-3.5 h-3.5 shrink-0" />
+                +92 (332) 213 7898
+              </a>
+              <div className="flex items-start gap-2 text-sm text-gray-500 dark:text-gray-400">
+                <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                Cantt Bazar Faisal, Karachi, Pakistan
+              </div>
+            </div>
+
+            {/* Socials */}
             <div className="flex items-center gap-2">
-              {[
-                { icon: Twitter, href: 'https://twitter.com/saasskul', label: 'Twitter' },
-                { icon: Linkedin, href: 'https://linkedin.com/company/saasskul', label: 'LinkedIn' },
-                { icon: Github, href: 'https://github.com/FazalShahidLatif/saasskul-website', label: 'GitHub' },
-                { icon: Mail, href: 'mailto:hello@saasskul.com', label: 'Email' },
-              ].map(({ icon: Icon, href, label }) => (
+              {socials.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
@@ -68,10 +87,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links */}
+          {/* Nav columns */}
           {Object.entries(links).map(([category, items]) => (
             <div key={category}>
-              <p className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">{category}</p>
+              <p className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
+                {category}
+              </p>
               <ul className="space-y-3">
                 {items.map((link) => (
                   <li key={link.label}>

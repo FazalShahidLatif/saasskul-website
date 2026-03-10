@@ -51,6 +51,7 @@ export default function LoginForm() {
     <div className="space-y-5">
       <div className="grid grid-cols-2 gap-3">
         <button
+          type="button"
           onClick={handleGoogleLogin}
           className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-gray-200 dark:border-white/8 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-all"
         >
@@ -63,6 +64,7 @@ export default function LoginForm() {
           Google
         </button>
         <button
+          type="button"
           onClick={handleGithubLogin}
           className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-gray-200 dark:border-white/8 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 transition-all"
         >
