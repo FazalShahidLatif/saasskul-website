@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
 import ContactForm from './ContactForm'
-import { Mail, MapPin, Clock, MessageSquare } from 'lucide-react'
+import { Mail, MapPin, Clock, Phone } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Contact — Get in Touch',
+  title: 'Contact — Get in Touch | SaaSSkul',
   description: 'Contact the SaaSSkul team for support, sales inquiries, or partnership opportunities.',
 }
 
 const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'hello@saaskul.com', href: 'mailto:hello@saaskul.com' },
-  { icon: MessageSquare, label: 'Live Chat', value: 'Available in app', href: '#' },
+  { icon: Mail, label: 'Email', value: 'hello@saasskul.com', href: 'mailto:hello@saasskul.com' },
+  { icon: Phone, label: 'Phone / WhatsApp', value: '+92 (332) 213 7898', href: 'tel:+923322137898' },
   { icon: Clock, label: 'Response Time', value: 'Within 2 hours', href: null },
-  { icon: MapPin, label: 'Location', value: 'San Francisco, CA', href: null },
+  { icon: MapPin, label: 'Location', value: 'Cantt Bazar Faisal, Karachi, Pakistan', href: 'https://maps.google.com/?q=Cantt+Bazar+Faisal+Karachi+Pakistan' },
 ]
 
 export default function ContactPage() {
@@ -44,7 +44,12 @@ export default function ContactPage() {
                 <div>
                   <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-0.5">{label}</p>
                   {href ? (
-                    <a href={href} className="text-sm font-medium text-gray-900 dark:text-white hover:text-brand-500 transition-colors">
+                    <a
+                      href={href}
+                      target={href.startsWith('http') ? '_blank' : undefined}
+                      rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                      className="text-sm font-medium text-gray-900 dark:text-white hover:text-brand-500 transition-colors"
+                    >
                       {value}
                     </a>
                   ) : (
@@ -56,15 +61,15 @@ export default function ContactPage() {
 
             {/* Office hours */}
             <div className="p-5 rounded-2xl border border-brand-400/20 bg-brand-400/5">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Office Hours</h3>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Office Hours (PKT)</h3>
               <div className="space-y-1.5 text-sm text-gray-500 dark:text-gray-400">
                 <div className="flex justify-between">
                   <span>Monday – Friday</span>
-                  <span>9am – 6pm PST</span>
+                  <span>10am – 7pm PKT</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Saturday</span>
-                  <span>10am – 2pm PST</span>
+                  <span>11am – 3pm PKT</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Sunday</span>

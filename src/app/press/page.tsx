@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 const facts = [
   { label: 'Founded', value: '2024' },
-  { label: 'Headquarters', value: 'Remote-first, Global' },
+  { label: 'Headquarters', value: 'Karachi, Pakistan (Remote-friendly)' },
   { label: 'Team Size', value: '12 people' },
   { label: 'Customers', value: '500+ businesses' },
   { label: 'Leads Generated', value: '10,000+' },
