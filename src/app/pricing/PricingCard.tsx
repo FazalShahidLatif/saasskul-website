@@ -1,6 +1,4 @@
-'use client'
-
-import { useState } from 'react'
+import Link from 'next/link'
 import { Check, Zap } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { PricingPlan } from '@/types'
@@ -9,35 +7,8 @@ interface PricingCardProps {
   plan: PricingPlan
 }
 
+// Stripe payments are disabled — clicking CTA goes to signup/contact
 export default function PricingCard({ plan }: PricingCardProps) {
-  const [loading, setLoading] = useState(false)
-
-  const handleCheckout = async () => {
-    setLoading(true)
-    try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ priceId: plan.priceId, plan: plan.id }),
-      })
-
-      const data = await res.json()
-
-      if (data.url) {
-        window.location.href = data.url
-      } else if (data.error === 'auth_required') {
-        window.location.href = `/auth/signup?plan=${plan.id}`
-      } else {
-        throw new Error(data.error || 'Checkout failed')
-      }
-    } catch (err) {
-      console.error(err)
-      alert('Something went wrong. Please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
   return (
     <div
       className={cn(
@@ -47,21 +18,17 @@ export default function PricingCard({ plan }: PricingCardProps) {
           : 'bg-white dark:bg-surface-800 border-gray-200 dark:border-white/8 hover:border-brand-400/30 hover-lift'
       )}
     >
-      {/* Badge */}
       {plan.badge && (
         <div
           className={cn(
             'absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold',
-            plan.highlighted
-              ? 'bg-white text-brand-600'
-              : 'bg-brand-500 text-white'
+            plan.highlighted ? 'bg-white text-brand-600' : 'bg-brand-500 text-white'
           )}
         >
           {plan.badge}
         </div>
       )}
 
-      {/* Plan name */}
       <div className="mb-5">
         <div
           className={cn(
@@ -90,35 +57,21 @@ export default function PricingCard({ plan }: PricingCardProps) {
         </p>
       </div>
 
-      {/* CTA */}
-      <button
-        onClick={handleCheckout}
-        disabled={loading}
+      {/* CTA — goes to contact instead of Stripe */}
+      <Link
+        href="/contact"
         className={cn(
-          'w-full py-3 px-5 rounded-xl font-semibold text-sm transition-all duration-200 mb-6',
+          'w-full py-3 px-5 rounded-xl font-semibold text-sm transition-all duration-200 mb-6 text-center block',
           plan.highlighted
             ? 'bg-white text-brand-600 hover:bg-gray-50 shadow-lg'
-            : 'bg-brand-500 text-white hover:bg-brand-400 shadow-lg shadow-brand-500/20',
-          loading && 'opacity-70 cursor-not-allowed'
+            : 'bg-brand-500 text-white hover:bg-brand-400 shadow-lg shadow-brand-500/20'
         )}
       >
-        {loading ? (
-          <span className="flex items-center justify-center gap-2">
-            <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-            </svg>
-            Processing...
-          </span>
-        ) : (
-          `Start ${plan.name} Plan`
-        )}
-      </button>
+        Get Started — {plan.name}
+      </Link>
 
-      {/* Divider */}
       <div className={cn('h-px mb-5', plan.highlighted ? 'bg-white/20' : 'bg-gray-100 dark:bg-white/5')} />
 
-      {/* Features */}
       <ul className="space-y-3 flex-1">
         {plan.features.map((feature) => (
           <li key={feature} className="flex items-start gap-3">
@@ -128,29 +81,17 @@ export default function PricingCard({ plan }: PricingCardProps) {
                 plan.highlighted ? 'bg-white/20' : 'bg-brand-400/15'
               )}
             >
-              <Check
-                className={cn('w-2.5 h-2.5', plan.highlighted ? 'text-white' : 'text-brand-500')}
-              />
+              <Check className={cn('w-2.5 h-2.5', plan.highlighted ? 'text-white' : 'text-brand-500')} />
             </div>
-            <span
-              className={cn(
-                'text-sm leading-relaxed',
-                plan.highlighted ? 'text-white/80' : 'text-gray-600 dark:text-gray-300'
-              )}
-            >
+            <span className={cn('text-sm leading-relaxed', plan.highlighted ? 'text-white/80' : 'text-gray-600 dark:text-gray-300')}>
               {feature}
             </span>
           </li>
         ))}
       </ul>
 
-      <p
-        className={cn(
-          'text-xs text-center mt-6',
-          plan.highlighted ? 'text-white/50' : 'text-gray-400 dark:text-gray-500'
-        )}
-      >
-        14-day free trial · Cancel anytime
+      <p className={cn('text-xs text-center mt-6', plan.highlighted ? 'text-white/50' : 'text-gray-400 dark:text-gray-500')}>
+        Contact us to get started
       </p>
     </div>
   )

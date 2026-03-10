@@ -23,39 +23,10 @@ export async function POST(req: NextRequest) {
 
     const { name, email, company, subject, message } = validated.data
 
-    // Send email via Resend (if configured)
-    if (process.env.RESEND_API_KEY) {
-      const { Resend } = await import('resend')
-      const resend = new Resend(process.env.RESEND_API_KEY)
+    // Log submission (email sending can be added later via Resend/Nodemailer)
+    console.log('Contact form submission:', { name, email, company, subject, message })
 
-      await resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || 'noreply@saaskul.com',
-        to: process.env.CONTACT_EMAIL || 'hello@saaskul.com',
-        subject: `[SaaSSkul Contact] ${subject}`,
-        html: `
-          <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 24px;">
-            <h2 style="color: #22c55e; margin-bottom: 24px;">New Contact Form Submission</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 8px 0; font-weight: 600; color: #374151; width: 120px;">Name:</td><td style="padding: 8px 0; color: #6b7280;">${name}</td></tr>
-              <tr><td style="padding: 8px 0; font-weight: 600; color: #374151;">Email:</td><td style="padding: 8px 0; color: #6b7280;">${email}</td></tr>
-              ${company ? `<tr><td style="padding: 8px 0; font-weight: 600; color: #374151;">Company:</td><td style="padding: 8px 0; color: #6b7280;">${company}</td></tr>` : ''}
-              <tr><td style="padding: 8px 0; font-weight: 600; color: #374151;">Subject:</td><td style="padding: 8px 0; color: #6b7280;">${subject}</td></tr>
-            </table>
-            <div style="margin-top: 16px; padding: 16px; background: #f9fafb; border-radius: 8px;">
-              <p style="font-weight: 600; color: #374151; margin-bottom: 8px;">Message:</p>
-              <p style="color: #6b7280; line-height: 1.6;">${message.replace(/\n/g, '<br>')}</p>
-            </div>
-          </div>
-        `,
-      })
-    }
-
-    // Log to console in development
-    if (process.env.NODE_ENV === 'development') {
-      console.log('Contact form submission:', { name, email, company, subject, message })
-    }
-
-    return NextResponse.json({ success: true, message: 'Message sent successfully' })
+    return NextResponse.json({ success: true, message: 'Message received! We will be in touch shortly.' })
   } catch (error) {
     console.error('Contact form error:', error)
     return NextResponse.json({ error: 'Failed to send message' }, { status: 500 })

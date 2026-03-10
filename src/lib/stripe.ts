@@ -1,17 +1,13 @@
-import Stripe from 'stripe'
-import { PricingPlan } from '@/types'
+import type { PricingPlan } from '@/types'
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_test_placeholder', {
-  apiVersion: '2024-04-10',
-  typescript: true,
-})
+// Stripe is disabled — payments will be enabled in a future update
 
 export const PRICING_PLANS: PricingPlan[] = [
   {
     id: 'starter',
     name: 'Starter',
     price: 29,
-    priceId: process.env.STRIPE_STARTER_PRICE_ID || 'price_starter',
+    priceId: 'price_starter',
     description: 'Perfect for solopreneurs and early-stage businesses',
     highlighted: false,
     features: [
@@ -28,7 +24,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     id: 'growth',
     name: 'Growth',
     price: 79,
-    priceId: process.env.STRIPE_GROWTH_PRICE_ID || 'price_growth',
+    priceId: 'price_growth',
     description: 'Ideal for growing businesses scaling their lead gen',
     highlighted: true,
     badge: 'Most Popular',
@@ -48,7 +44,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     id: 'agency',
     name: 'Agency',
     price: 199,
-    priceId: process.env.STRIPE_AGENCY_PRICE_ID || 'price_agency',
+    priceId: 'price_agency',
     description: 'Built for agencies managing multiple client accounts',
     highlighted: false,
     badge: 'Best Value',
@@ -66,23 +62,3 @@ export const PRICING_PLANS: PricingPlan[] = [
     ],
   },
 ]
-
-export async function createCheckoutSession(
-  priceId: string,
-  userId: string,
-  userEmail: string,
-  plan: string
-) {
-  const session = await stripe.checkout.sessions.create({
-    mode: 'subscription',
-    payment_method_types: ['card'],
-    customer_email: userEmail,
-    line_items: [{ price: priceId, quantity: 1 }],
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard?success=true&plan=${plan}`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/pricing?canceled=true`,
-    metadata: { userId, plan },
-    subscription_data: { metadata: { userId, plan } },
-    allow_promotion_codes: true,
-  })
-  return session
-}

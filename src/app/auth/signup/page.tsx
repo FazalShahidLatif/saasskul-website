@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 import SignupForm from './SignupForm'
 import Link from 'next/link'
 import { Zap } from 'lucide-react'
@@ -33,7 +34,9 @@ export default function SignupPage() {
         </div>
 
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 p-8 shadow-xl shadow-black/5">
-          <SignupForm />
+          <Suspense fallback={<div className="h-96 flex items-center justify-center text-gray-400 text-sm">Loading...</div>}>
+            <SignupForm />
+          </Suspense>
         </div>
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-5">

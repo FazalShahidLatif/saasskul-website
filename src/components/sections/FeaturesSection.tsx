@@ -98,11 +98,7 @@ export default function FeaturesSection() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className={`group p-6 rounded-2xl border bg-white dark:bg-surface-800 ${feature.border} border-transparent hover:border-current transition-all duration-300 hover-lift`}
-              style={{ borderColor: 'transparent' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = ''
-              }}
+              className={`group p-6 rounded-2xl border bg-white dark:bg-surface-800 border-gray-100 dark:border-white/6 hover:border-brand-400/30 transition-all duration-300 hover-lift`}
             >
               <div
                 className={`w-11 h-11 rounded-xl ${feature.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}
