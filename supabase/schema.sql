@@ -140,3 +140,19 @@ CREATE TRIGGER update_leads_updated_at BEFORE UPDATE ON public.leads
 
 CREATE TRIGGER update_automations_updated_at BEFORE UPDATE ON public.automations
   FOR EACH ROW EXECUTE PROCEDURE update_updated_at();
+
+-- =====================
+-- MIGRATION: Onboarding + Paddle fields
+-- Run this in Supabase SQL Editor if users table already exists
+-- =====================
+ALTER TABLE public.users
+  ADD COLUMN IF NOT EXISTS company_name TEXT,
+  ADD COLUMN IF NOT EXISTS company_size TEXT,
+  ADD COLUMN IF NOT EXISTS industry TEXT,
+  ADD COLUMN IF NOT EXISTS onboarding_goals JSONB DEFAULT '[]',
+  ADD COLUMN IF NOT EXISTS onboarding_use_cases JSONB DEFAULT '[]',
+  ADD COLUMN IF NOT EXISTS preferred_crm TEXT,
+  ADD COLUMN IF NOT EXISTS referral_source TEXT,
+  ADD COLUMN IF NOT EXISTS onboarding_completed BOOLEAN DEFAULT FALSE,
+  ADD COLUMN IF NOT EXISTS paddle_customer_id TEXT,
+  ADD COLUMN IF NOT EXISTS paddle_subscription_id TEXT;

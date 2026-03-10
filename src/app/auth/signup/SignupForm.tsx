@@ -45,10 +45,10 @@ export default function SignupForm() {
       setError('An account with this email already exists. Please sign in.')
       setLoading(false)
     } else {
-      if (plan) {
-        router.push(`/pricing?plan=${plan}`)
-      } else {
-        setSuccess(true)
+      // Redirect to onboarding after successful signup
+
+
+      if (data.session) { router.push("/onboarding") } else { setSuccess(true) }
       }
     }
   }

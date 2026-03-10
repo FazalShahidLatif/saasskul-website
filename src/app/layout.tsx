@@ -3,6 +3,7 @@ import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import ChatWidget from '@/components/ChatWidget'
+import PaddleProvider from '@/components/PaddleProvider'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -80,6 +81,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
           <ChatWidget />
+          <PaddleProvider />
         </ThemeProvider>
       </body>
     </html>
