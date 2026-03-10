@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Zap, Twitter, Linkedin, Github, Mail } from 'lucide-react'
 
-const footerLinks = {
+const links = {
   Product: [
     { label: 'AI Lead Engine', href: '/ai-lead-engine' },
     { label: 'Services', href: '/services' },
@@ -10,9 +10,9 @@ const footerLinks = {
   ],
   Company: [
     { label: 'About Us', href: '/about' },
-    { label: 'Contact', href: '/contact' },
     { label: 'Careers', href: '/careers' },
     { label: 'Press Kit', href: '/press' },
+    { label: 'Contact', href: '/contact' },
   ],
   Legal: [
     { label: 'Privacy Policy', href: '/privacy' },
@@ -20,13 +20,19 @@ const footerLinks = {
     { label: 'Cookie Policy', href: '/cookies' },
     { label: 'GDPR', href: '/gdpr' },
   ],
+  Account: [
+    { label: 'Sign Up Free', href: '/auth/signup' },
+    { label: 'Login', href: '/auth/login' },
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Forgot Password', href: '/auth/forgot-password' },
+  ],
 }
 
 export default function Footer() {
   return (
-    <footer className="border-t border-gray-200 dark:border-white/5 bg-gray-50 dark:bg-surface-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8 lg:gap-12">
+    <footer className="border-t border-gray-100 dark:border-white/5 bg-white dark:bg-surface-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
@@ -34,41 +40,40 @@ export default function Footer() {
                 <Zap className="w-4 h-4 text-black fill-black" />
               </div>
               <span className="font-display font-bold text-xl">
-                <span className="text-brand-500">SaaS</span>
+                <span className="text-brand-400">SaaS</span>
                 <span className="text-gray-900 dark:text-white">Skul</span>
               </span>
             </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-xs">
-              AI-powered lead generation systems for small businesses. Capture, qualify, and convert
-              leads on autopilot.
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-5 leading-relaxed max-w-xs">
+              AI-powered lead generation that fills your pipeline automatically — so you can focus on closing.
             </p>
-            <div className="flex items-center gap-3 mt-5">
+            <div className="flex items-center gap-2">
               {[
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Github, href: '#', label: 'GitHub' },
-                { icon: Mail, href: 'mailto:hello@saaskul.com', label: 'Email' },
+                { icon: Twitter, href: 'https://twitter.com/saasskul', label: 'Twitter' },
+                { icon: Linkedin, href: 'https://linkedin.com/company/saasskul', label: 'LinkedIn' },
+                { icon: Github, href: 'https://github.com/FazalShahidLatif/saasskul-website', label: 'GitHub' },
+                { icon: Mail, href: 'mailto:hello@saasskul.com', label: 'Email' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-8 h-8 rounded-lg bg-gray-200 dark:bg-white/5 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-400/10 transition-all"
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-400/10 transition-all"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="w-3.5 h-3.5" />
                 </a>
               ))}
             </div>
           </div>
 
           {/* Links */}
-          {Object.entries(footerLinks).map(([category, links]) => (
+          {Object.entries(links).map(([category, items]) => (
             <div key={category}>
-              <h3 className="text-xs font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-                {category}
-              </h3>
-              <ul className="space-y-2.5">
-                {links.map((link) => (
+              <p className="text-xs font-bold text-gray-900 dark:text-white uppercase tracking-wider mb-4">{category}</p>
+              <ul className="space-y-3">
+                {items.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
@@ -83,14 +88,14 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 pt-6 border-t border-gray-200 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-400 dark:text-gray-500">
-            © {new Date().getFullYear()} SaaSSkul, Inc. All rights reserved.
-          </p>
-          <div className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
-            <span>Built with</span>
-            <span className="text-brand-500">♥</span>
-            <span>by the SaaSSkul team</span>
+        {/* Bottom bar */}
+        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+          <p>© {new Date().getFullYear()} SaaSSkul. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <Link href="/privacy" className="hover:text-brand-500 transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-brand-500 transition-colors">Terms</Link>
+            <Link href="/cookies" className="hover:text-brand-500 transition-colors">Cookies</Link>
+            <Link href="/gdpr" className="hover:text-brand-500 transition-colors">GDPR</Link>
           </div>
         </div>
       </div>
