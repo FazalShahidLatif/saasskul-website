@@ -49,7 +49,6 @@ export default function LoginForm() {
 
   return (
     <div className="space-y-5">
-      {/* OAuth */}
       <div className="grid grid-cols-2 gap-3">
         <button
           onClick={handleGoogleLogin}

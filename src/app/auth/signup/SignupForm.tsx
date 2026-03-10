@@ -25,7 +25,6 @@ export default function SignupForm() {
       setError('Password must be at least 8 characters')
       return
     }
-
     setLoading(true)
     setError('')
 
@@ -68,12 +67,9 @@ export default function SignupForm() {
         <div className="w-14 h-14 rounded-full bg-brand-400/15 flex items-center justify-center mx-auto">
           <Check className="w-7 h-7 text-brand-500" />
         </div>
-        <h3 className="font-display text-xl font-bold text-gray-900 dark:text-white">
-          Check your email!
-        </h3>
+        <h3 className="font-display text-xl font-bold text-gray-900 dark:text-white">Check your email!</h3>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           We sent a confirmation link to <strong className="text-gray-700 dark:text-gray-200">{email}</strong>.
-          Click it to activate your account.
         </p>
       </div>
     )

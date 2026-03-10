@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createCheckoutSession } from '@/lib/stripe'
-import { supabaseAdmin } from '@/lib/supabase'
-import { cookies } from 'next/headers'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,32 +9,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // Check if user is authenticated
-    const supabase = createServerComponentClient({ cookies })
-    const {
-      data: { session },
-    } = await supabase.auth.getSession()
+    // Try to get user session
+    let userId = 'guest'
+    let userEmail = 'guest@example.com'
 
-    if (!session?.user) {
+    try {
+      const { cookies } = await import('next/headers')
+      const { createServerComponentClient } = await import('@supabase/auth-helpers-nextjs')
+      const supabase = createServerComponentClient({ cookies })
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session?.user) {
+        return NextResponse.json({ error: 'auth_required' }, { status: 401 })
+      }
+      userId = session.user.id
+      userEmail = session.user.email!
+    } catch {
       return NextResponse.json({ error: 'auth_required' }, { status: 401 })
     }
 
-    const user = session.user
-
-    // Create Stripe checkout session
-    const checkoutSession = await createCheckoutSession(
-      priceId,
-      user.id,
-      user.email!,
-      plan
-    )
-
+    const checkoutSession = await createCheckoutSession(priceId, userId, userEmail, plan)
     return NextResponse.json({ url: checkoutSession.url })
   } catch (error) {
     console.error('Checkout error:', error)
-    return NextResponse.json(
-      { error: 'Failed to create checkout session' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Failed to create checkout session' }, { status: 500 })
   }
 }
