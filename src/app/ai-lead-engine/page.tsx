@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Bot, Calendar, Filter, Mail, MousePointer, Target, Zap } from 'lucide-react'
+import { ArrowRight, Brain, Calendar, Mail, MousePointer, Zap } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'AI Lead Engine — How It Works',
@@ -89,9 +89,6 @@ const colorMap: Record<string, { text: string; bg: string; border: string; num: 
   cyan: { text: 'text-cyan-500', bg: 'bg-cyan-400/10', border: 'border-cyan-400/20', num: 'from-cyan-400 to-cyan-500' },
   yellow: { text: 'text-yellow-500', bg: 'bg-yellow-400/10', border: 'border-yellow-400/20', num: 'from-yellow-400 to-yellow-500' },
 }
-
-// Avoid importing from lucide-react inside JSX; use a lookup
-import { Brain } from 'lucide-react'
 
 export default function AiLeadEnginePage() {
   return (

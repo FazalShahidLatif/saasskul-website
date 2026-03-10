@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createCheckoutSession } from '@/lib/stripe'
-import { supabaseServer } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase'
+import { cookies } from 'next/headers'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,7 +13,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Check if user is authenticated
-    const supabase = supabaseServer()
+    const supabase = createServerComponentClient({ cookies })
     const {
       data: { session },
     } = await supabase.auth.getSession()
