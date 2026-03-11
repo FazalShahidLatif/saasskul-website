@@ -24,7 +24,13 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: 'SaaSSkul Team' }],
   creator: 'SaaSSkul',
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://saaskul.com'),
+  metadataBase: new URL('https://saasskul.com'),
+  alternates: {
+    canonical: 'https://saasskul.com',
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -73,8 +79,86 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Organization',
+        '@id': 'https://saasskul.com/#organization',
+        name: 'SaaSSkul',
+        url: 'https://saasskul.com',
+        logo: {
+          '@type': 'ImageObject',
+          url: 'https://saasskul.com/logo.png',
+        },
+        contactPoint: {
+          '@type': 'ContactPoint',
+          telephone: '+92-332-213-7898',
+          contactType: 'customer support',
+          email: 'hello@saasskul.com',
+          availableLanguage: 'English',
+        },
+        address: {
+          '@type': 'PostalAddress',
+          streetAddress: 'Cantt Bazar Faisal',
+          addressLocality: 'Karachi',
+          addressCountry: 'PK',
+        },
+        sameAs: [
+          'https://twitter.com/saasskul',
+          'https://linkedin.com/company/saasskul',
+          'https://github.com/FazalShahidLatif/saasskul-website',
+        ],
+      },
+      {
+        '@type': 'WebSite',
+        '@id': 'https://saasskul.com/#website',
+        url: 'https://saasskul.com',
+        name: 'SaaSSkul',
+        description: 'AI-powered lead generation platform for small businesses',
+        publisher: { '@id': 'https://saasskul.com/#organization' },
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: 'https://saasskul.com/blog?q={search_term_string}',
+          'query-input': 'required name=search_term_string',
+        },
+      },
+      {
+        '@type': 'SoftwareApplication',
+        name: 'SaaSSkul AI Lead Engine',
+        applicationCategory: 'BusinessApplication',
+        offers: {
+          '@type': 'AggregateOffer',
+          priceCurrency: 'USD',
+          lowPrice: '29',
+          highPrice: '199',
+          offerCount: '3',
+        },
+        operatingSystem: 'Web',
+        url: 'https://saasskul.com',
+      },
+    ],
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {/* Google Analytics — replace G-XXXXXXXXXX with your Measurement ID */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}',{page_path:window.location.pathname});`,
+              }}
+            />
+          </>
+        )}
+      </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
           <Navbar />

@@ -3,7 +3,8 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Zap, ArrowLeft, Mail, CheckCircle } from 'lucide-react'
-import { supabaseBrowser } from '@/lib/supabase'
+import { supabaseBrowser, isSupabaseConfigured } from '@/lib/supabase'
+import AuthConfigBanner from '@/components/auth/AuthConfigBanner'
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('')
@@ -13,6 +14,10 @@ export default function ForgotPasswordPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (!isSupabaseConfigured()) {
+      setError('Authentication is not configured yet. Please set your Supabase environment variables on Hostinger and redeploy.')
+      return
+    }
     setLoading(true)
     setError('')
 
@@ -49,11 +54,12 @@ export default function ForgotPasswordPage() {
             Reset your password
           </h1>
           <p className="text-gray-500 dark:text-gray-400">
-            Enter your email and we'll send you a reset link.
+            Enter your email and we&apos;ll send you a reset link.
           </p>
         </div>
 
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 p-8 shadow-xl shadow-black/5">
+          <AuthConfigBanner />
           {sent ? (
             <div className="text-center py-4 space-y-4">
               <div className="w-14 h-14 rounded-full bg-brand-400/15 flex items-center justify-center mx-auto">
@@ -68,7 +74,7 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
               <div className="pt-2 flex flex-col gap-2">
-                <p className="text-xs text-gray-400">Didn't receive it? Check your spam folder or</p>
+                <p className="text-xs text-gray-400">Didn&apos;t receive it? Check your spam folder or</p>
                 <button
                   onClick={() => { setSent(false); setEmail('') }}
                   className="text-sm font-semibold text-brand-500 hover:underline"

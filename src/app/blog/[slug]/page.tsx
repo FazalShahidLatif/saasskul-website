@@ -21,13 +21,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: {
+      canonical: `https://saasskul.com/blog/${post.slug}`,
+    },
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
+      url: `https://saasskul.com/blog/${post.slug}`,
       publishedTime: post.published_at,
       authors: [post.author],
-      images: post.cover_image ? [{ url: post.cover_image, width: 1200, height: 630 }] : [],
+      tags: post.tags,
+      images: post.cover_image ? [{ url: post.cover_image, width: 1200, height: 630, alt: post.title }] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: post.cover_image ? [post.cover_image] : [],
     },
   }
 }
@@ -40,8 +51,31 @@ export default function BlogPostPage({ params }: Props) {
     (p) => p.id !== post.id && (p.category === post.category || p.tags.some((t) => post.tags.includes(t)))
   ).slice(0, 3)
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    author: { '@type': 'Person', name: post.author },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SaaSSkul',
+      logo: { '@type': 'ImageObject', url: 'https://saasskul.com/logo.png' },
+    },
+    datePublished: post.published_at,
+    dateModified: post.published_at,
+    image: post.cover_image || 'https://saasskul.com/og-image.png',
+    url: `https://saasskul.com/blog/${post.slug}`,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://saasskul.com/blog/${post.slug}` },
+    keywords: post.tags.join(', '),
+  }
+
   return (
     <div className="pt-24 pb-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           {/* Back button */}
