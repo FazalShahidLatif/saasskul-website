@@ -74,7 +74,7 @@ export default function CareersPage() {
             Build the future of{' '}
             <span className="text-gradient">AI sales</span>
           </h1>
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">
             We are a small, high-output team building something people genuinely love. If you want to do your best work alongside people who care, you will fit right in.
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function CareersPage() {
                   <Icon className="w-5 h-5 text-brand-500" />
                 </div>
                 <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{title}</p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">{desc}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-500">{desc}</p>
               </div>
             ))}
           </div>
@@ -101,7 +101,7 @@ export default function CareersPage() {
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <h2 className="font-display text-3xl font-bold text-gray-900 dark:text-white mb-2">Open Roles</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-8">All roles are fully remote unless otherwise stated.</p>
+          <p className="text-gray-500 dark:text-gray-500 mb-8">All roles are fully remote unless otherwise stated.</p>
 
           <div className="space-y-4">
             {openRoles.map((role) => (
@@ -113,15 +113,15 @@ export default function CareersPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2 flex-wrap">
                       <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-400/10 text-brand-500">{role.department}</span>
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
+                      <span className="flex items-center gap-1 text-xs text-gray-500">
                         <MapPin className="w-3 h-3" />{role.location}
                       </span>
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
+                      <span className="flex items-center gap-1 text-xs text-gray-500">
                         <Clock className="w-3 h-3" />{role.type}
                       </span>
                     </div>
                     <h3 className="font-display font-bold text-gray-900 dark:text-white mb-1">{role.title}</h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{role.description}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-500">{role.description}</p>
                   </div>
                   <Link
                     href={`/contact?role=${encodeURIComponent(role.title)}`}
@@ -141,7 +141,7 @@ export default function CareersPage() {
         <div className="max-w-2xl mx-auto px-4 sm:px-6">
           <div className="p-8 rounded-2xl bg-gray-50 dark:bg-white/3 border border-gray-100 dark:border-white/6 text-center">
             <h3 className="font-display font-bold text-gray-900 dark:text-white mb-2">Don't see your role?</h3>
-            <p className="text-gray-500 dark:text-gray-400 mb-5 text-sm">We are always interested in exceptional people. Send us a note and tell us how you'd contribute.</p>
+            <p className="text-gray-500 dark:text-gray-500 mb-5 text-sm">We are always interested in exceptional people. Send us a note and tell us how you'd contribute.</p>
             <Link
               href="mailto:careers@saasskul.com"
               className="inline-flex items-center gap-2 px-5 py-2.5 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-gray-700 dark:text-gray-200 font-medium text-sm rounded-xl hover:border-brand-400/50 transition-all"

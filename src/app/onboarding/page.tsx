@@ -164,7 +164,7 @@ export default function OnboardingPage() {
                   ? 'bg-brand-500 text-white'
                   : step === s.id
                   ? 'bg-brand-500 text-white ring-4 ring-brand-400/20'
-                  : 'bg-gray-200 dark:bg-white/8 text-gray-400'
+                  : 'bg-gray-200 dark:bg-white/8 text-gray-500'
               )}>
                 {step > s.id
                   ? <CheckCircle className="w-4 h-4" />
@@ -172,7 +172,7 @@ export default function OnboardingPage() {
               </div>
               <span className={cn(
                 'text-[10px] font-medium hidden sm:block',
-                step >= s.id ? 'text-brand-500' : 'text-gray-400'
+                step >= s.id ? 'text-brand-500' : 'text-gray-500'
               )}>{s.label}</span>
             </div>
             {i < STEPS.length - 1 && (
@@ -216,7 +216,7 @@ export default function OnboardingPage() {
                           'p-3 rounded-xl border text-center transition-all',
                           data.company_size === s.value
                             ? 'border-brand-400 bg-brand-400/10 text-brand-500'
-                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-400 hover:border-brand-400/40'
+                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-500 hover:border-brand-400/40'
                         )}
                       >
                         <p className="font-bold text-sm">{s.label}</p>
@@ -244,7 +244,7 @@ export default function OnboardingPage() {
                       'p-4 rounded-xl border flex flex-col items-center gap-2 transition-all',
                       data.industry === value
                         ? 'border-brand-400 bg-brand-400/10 text-brand-500'
-                        : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-400 hover:border-brand-400/40'
+                        : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-500 hover:border-brand-400/40'
                     )}
                   >
                     <Icon className="w-5 h-5" />
@@ -275,7 +275,7 @@ export default function OnboardingPage() {
                   >
                     <div className={cn(
                       'w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0',
-                      data.goals.includes(value) ? 'bg-brand-500 text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-400'
+                      data.goals.includes(value) ? 'bg-brand-500 text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-500'
                     )}>
                       <Icon className="w-4 h-4" />
                     </div>
@@ -307,7 +307,7 @@ export default function OnboardingPage() {
                           'px-3.5 py-2 rounded-full border text-sm font-medium transition-all',
                           data.use_cases.includes(value)
                             ? 'border-brand-400 bg-brand-400/10 text-brand-500'
-                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-400 hover:border-brand-400/40'
+                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-500 hover:border-brand-400/40'
                         )}
                       >
                         {label}
@@ -327,7 +327,7 @@ export default function OnboardingPage() {
                           'px-3 py-2 rounded-xl border text-sm transition-all',
                           data.crm === value
                             ? 'border-brand-400 bg-brand-400/10 text-brand-500'
-                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-400 hover:border-brand-400/40'
+                            : 'border-gray-200 dark:border-white/8 text-gray-500 dark:text-gray-500 hover:border-brand-400/40'
                         )}
                       >
                         {label}
@@ -361,14 +361,14 @@ export default function OnboardingPage() {
                 <h2 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-2">
                   You're all set, {data.company_name || 'friend'}! 🎉
                 </h2>
-                <p className="text-gray-500 dark:text-gray-400">
+                <p className="text-gray-500 dark:text-gray-500">
                   Your workspace is ready. Let's start generating leads.
                 </p>
               </div>
 
               {/* What's next checklist */}
               <div className="text-left space-y-2 bg-gray-50 dark:bg-white/3 rounded-xl p-4 border border-gray-100 dark:border-white/6">
-                <p className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">What's next</p>
+                <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">What's next</p>
                 {[
                   'Explore your AI Lead Dashboard',
                   'Set up your first automation workflow',
@@ -401,7 +401,7 @@ export default function OnboardingPage() {
             <button
               onClick={() => setStep(s => s - 1)}
               disabled={step === 1}
-              className="flex items-center gap-1.5 text-sm font-medium text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-1.5 text-sm font-medium text-gray-500 hover:text-gray-700 dark:hover:text-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               <ArrowLeft className="w-4 h-4" /> Back
             </button>
@@ -417,7 +417,7 @@ export default function OnboardingPage() {
         )}
       </div>
 
-      <p className="mt-6 text-xs text-gray-400">
+      <p className="mt-6 text-xs text-gray-500">
         Want to skip this?{' '}
         <button onClick={() => router.push('/dashboard')} className="text-brand-500 hover:underline">
           Go straight to dashboard
@@ -432,7 +432,7 @@ function StepWrapper({ title, subtitle, children }: { title: string; subtitle: s
     <div className="space-y-6">
       <div>
         <h2 className="font-display text-xl font-bold text-gray-900 dark:text-white mb-1">{title}</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400">{subtitle}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-500">{subtitle}</p>
       </div>
       {children}
     </div>

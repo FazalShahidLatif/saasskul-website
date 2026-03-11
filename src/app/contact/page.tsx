@@ -42,7 +42,7 @@ export default function ContactPage() {
                   <Icon className="w-5 h-5 text-brand-500" />
                 </div>
                 <div>
-                  <p className="text-xs font-medium text-gray-400 dark:text-gray-500 mb-0.5">{label}</p>
+                  <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-0.5">{label}</p>
                   {href ? (
                     <a
                       href={href}

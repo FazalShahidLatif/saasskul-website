@@ -52,13 +52,25 @@ export default function PricingPage() {
           </p>
 
           {/* Toggle (visual only) */}
-          <div className="inline-flex items-center gap-3 mt-6 p-1 bg-gray-100 dark:bg-white/5 rounded-xl">
-            <button className="px-4 py-2 text-sm font-medium bg-white dark:bg-surface-800 text-gray-900 dark:text-white rounded-lg shadow-sm">
+          <div
+            role="group"
+            aria-label="Billing frequency"
+            className="inline-flex items-center gap-3 mt-6 p-1 bg-gray-100 dark:bg-white/5 rounded-xl"
+          >
+            <button
+              aria-pressed="true"
+              aria-label="Monthly billing"
+              className="px-4 py-2 text-sm font-medium bg-white dark:bg-surface-800 text-gray-900 dark:text-white rounded-lg shadow-sm"
+            >
               Monthly
             </button>
-            <button className="px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors">
+            <button
+              aria-pressed="false"
+              aria-label="Annual billing — save 20%"
+              className="px-4 py-2 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+            >
               Annual
-              <span className="ml-2 text-xs font-bold text-brand-500 bg-brand-400/10 px-1.5 py-0.5 rounded">
+              <span aria-hidden="true" className="ml-2 text-xs font-bold text-brand-500 bg-brand-400/10 px-1.5 py-0.5 rounded">
                 Save 20%
               </span>
             </button>
@@ -74,7 +86,7 @@ export default function PricingPage() {
 
         {/* Feature comparison note */}
         <div className="text-center mb-20">
-          <p className="text-sm text-gray-400 dark:text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-400">
             All plans include SSL security, 99.9% uptime SLA, and GDPR compliance.{' '}
             <Link href="/contact" className="text-brand-500 hover:underline">
               Need a custom plan?

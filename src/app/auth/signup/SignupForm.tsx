@@ -84,7 +84,7 @@ export default function SignupForm() {
         <p className="text-sm text-gray-500 dark:text-gray-400">
           We sent a confirmation link to <strong className="text-gray-700 dark:text-gray-200">{email}</strong>.
         </p>
-        <p className="text-xs text-gray-400">
+        <p className="text-xs text-gray-500">
           Didn&apos;t receive it?{' '}
           <button onClick={() => setSuccess(false)} className="text-brand-500 hover:underline">Try again</button>.
         </p>
@@ -144,6 +144,7 @@ export default function SignupForm() {
               required autoComplete="new-password"
               className="w-full px-4 py-2.5 pr-10 rounded-xl border border-gray-200 dark:border-white/8 bg-white dark:bg-white/3 text-gray-900 dark:text-white text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all placeholder:text-gray-400" />
             <button type="button" onClick={() => setShowPassword(!showPassword)}
+              aria-label={showPassword ? 'Hide password' : 'Show password'}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>

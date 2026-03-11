@@ -69,7 +69,7 @@ export default function HeroSection() {
 
           {/* Social proof */}
           <div
-            className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-400 dark:text-gray-500 animate-fade-up opacity-0-init"
+            className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400 animate-fade-up opacity-0-init"
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
             <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ export default function HeroSection() {
                 <div className="w-3 h-3 rounded-full bg-yellow-400" />
                 <div className="w-3 h-3 rounded-full bg-green-400" />
               </div>
-              <div className="flex-1 mx-4 bg-gray-100 dark:bg-white/5 rounded-lg px-3 py-1 text-xs text-gray-400 dark:text-gray-500">
+              <div className="flex-1 mx-4 bg-gray-100 dark:bg-white/5 rounded-lg px-3 py-1 text-xs text-gray-500 dark:text-gray-400">
                 app.saaskul.com/dashboard
               </div>
             </div>
@@ -151,11 +151,11 @@ export default function HeroSection() {
                     <div key={lead.name} className="px-4 py-3 flex items-center justify-between">
                       <div>
                         <p className="text-sm font-medium text-gray-900 dark:text-white">{lead.name}</p>
-                        <p className="text-xs text-gray-400 dark:text-gray-500">{lead.company}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{lead.company}</p>
                       </div>
                       <div className="flex items-center gap-3">
                         <div className="text-right">
-                          <p className="text-xs text-gray-400 dark:text-gray-500">AI Score</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">AI Score</p>
                           <p className="text-sm font-bold text-gray-900 dark:text-white">{lead.score}</p>
                         </div>
                         <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${lead.statusColor}`}>{lead.status}</span>

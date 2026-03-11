@@ -29,7 +29,7 @@ export default function NotFound() {
         <h1 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-3">
           Page not found
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-8 leading-relaxed">
+        <p className="text-gray-500 dark:text-gray-500 mb-8 leading-relaxed">
           The page you&apos;re looking for doesn&apos;t exist or has been moved.
           Let&apos;s get you back on track.
         </p>
@@ -53,7 +53,7 @@ export default function NotFound() {
 
         {/* Quick links */}
         <div className="mt-12 pt-8 border-t border-gray-100 dark:border-white/6">
-          <p className="text-xs text-gray-400 mb-4 uppercase tracking-wider font-semibold">Popular pages</p>
+          <p className="text-xs text-gray-500 mb-4 uppercase tracking-wider font-semibold">Popular pages</p>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             {[
               ['Pricing', '/pricing'],
@@ -63,7 +63,7 @@ export default function NotFound() {
               ['Sign Up', '/auth/signup'],
             ].map(([label, href]) => (
               <Link key={label} href={href}
-                className="text-sm text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-colors">
+                className="text-sm text-gray-500 dark:text-gray-500 hover:text-brand-500 transition-colors">
                 {label}
               </Link>
             ))}

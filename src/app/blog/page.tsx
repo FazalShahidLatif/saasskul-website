@@ -68,7 +68,7 @@ export default function BlogPage() {
                 <span className="text-xs font-semibold text-brand-500 bg-brand-400/10 px-2.5 py-1 rounded-full">
                   Featured
                 </span>
-                <span className="text-xs font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-medium text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-white/5 px-2.5 py-1 rounded-full">
                   {featured.category}
                 </span>
               </div>
@@ -79,7 +79,7 @@ export default function BlogPage() {
                 {featured.excerpt}
               </p>
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-sm text-gray-400 dark:text-gray-500">
+                <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <span>{featured.author}</span>
                   <span>·</span>
                   <span>{formatDate(featured.published_at)}</span>
@@ -125,7 +125,7 @@ export default function BlogPage() {
                 <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed mb-4 line-clamp-2 flex-1">
                   {post.excerpt}
                 </p>
-                <div className="flex items-center justify-between text-xs text-gray-400 dark:text-gray-500 pt-4 border-t border-gray-50 dark:border-white/4">
+                <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 pt-4 border-t border-gray-50 dark:border-white/4">
                   <span>{post.author}</span>
                   <span className="flex items-center gap-1">
                     <Clock className="w-3 h-3" />

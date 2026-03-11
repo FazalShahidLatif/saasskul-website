@@ -110,7 +110,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
+        <div className="pt-8 border-t border-gray-100 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500 dark:text-gray-400">
           <p>© {new Date().getFullYear()} SaaSSkul. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link href="/privacy" className="hover:text-brand-500 transition-colors">Privacy</Link>

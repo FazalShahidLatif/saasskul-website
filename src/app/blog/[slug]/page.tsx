@@ -100,7 +100,7 @@ export default function BlogPostPage({ params }: Props) {
           </h1>
 
           {/* Meta */}
-          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 dark:text-gray-500 mb-8 pb-8 border-b border-gray-100 dark:border-white/6">
+          <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-8 pb-8 border-b border-gray-100 dark:border-white/6">
             <span className="font-medium text-gray-600 dark:text-gray-300">{post.author}</span>
             <span>·</span>
             <span>{formatDate(post.published_at)}</span>
@@ -172,7 +172,7 @@ export default function BlogPostPage({ params }: Props) {
                   <h4 className="font-semibold text-gray-900 dark:text-white group-hover:text-brand-500 transition-colors text-sm leading-snug mb-1">
                     {p.title}
                   </h4>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">{p.reading_time} min read</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">{p.reading_time} min read</span>
                 </Link>
               ))}
             </div>

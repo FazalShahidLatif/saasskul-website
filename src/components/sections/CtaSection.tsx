@@ -20,7 +20,7 @@ export default function CtaSection() {
             <h2 className="font-display text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight">
               Ready to 10x Your Lead Generation?
             </h2>
-            <p className="text-lg text-white/80 max-w-2xl mx-auto mb-10">
+            <p className="text-lg text-white/90 max-w-2xl mx-auto mb-10">
               Join 500+ businesses using SaaSSkul to capture, qualify, and convert leads on
               autopilot. No credit card required.
             </p>
@@ -41,7 +41,7 @@ export default function CtaSection() {
               </Link>
             </div>
 
-            <p className="text-xs text-white/60 mt-6">
+            <p className="text-xs text-white/90 mt-6">
               14-day free trial · No credit card required · Cancel anytime
             </p>
           </div>

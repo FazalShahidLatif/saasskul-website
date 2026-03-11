@@ -43,7 +43,7 @@ export default function PressPage() {
           <h1 className="font-display text-5xl font-extrabold text-gray-900 dark:text-white mb-5">
             Press & Media Kit
           </h1>
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">
             Everything journalists and creators need to cover SaaSSkul — brand assets, company facts, and media contact.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function PressPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {facts.map(({ label, value }) => (
               <div key={label} className="p-4 rounded-xl bg-gray-50 dark:bg-white/3 border border-gray-100 dark:border-white/6">
-                <p className="text-xs text-gray-400 mb-1">{label}</p>
+                <p className="text-xs text-gray-500 mb-1">{label}</p>
                 <p className="font-display font-bold text-gray-900 dark:text-white">{value}</p>
               </div>
             ))}
@@ -80,7 +80,7 @@ export default function PressPage() {
       <section className="py-16 bg-gray-50 dark:bg-white/2">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <h2 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-2">Brand Assets</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-8 text-sm">Please follow our brand guidelines when using these assets. Do not modify colors or proportions.</p>
+          <p className="text-gray-500 dark:text-gray-500 mb-8 text-sm">Please follow our brand guidelines when using these assets. Do not modify colors or proportions.</p>
 
           {/* Logo preview */}
           <div className="p-8 rounded-2xl bg-white dark:bg-surface-800 border border-gray-100 dark:border-white/6 mb-5 flex items-center justify-center gap-3">
@@ -101,7 +101,7 @@ export default function PressPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-semibold text-gray-900 dark:text-white text-sm mb-0.5">{title}</p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">{desc}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-500 mb-3">{desc}</p>
                   <a href={action} className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-500 hover:underline">
                     <Download className="w-3 h-3" /> Download
                   </a>
@@ -123,7 +123,7 @@ export default function PressPage() {
                   <p className="text-xs font-bold text-brand-500 mb-1">{outlet}</p>
                   <p className="font-medium text-gray-900 dark:text-white text-sm">{headline}</p>
                 </div>
-                <span className="text-xs text-gray-400 whitespace-nowrap">{date}</span>
+                <span className="text-xs text-gray-500 whitespace-nowrap">{date}</span>
               </div>
             ))}
           </div>
@@ -137,11 +137,11 @@ export default function PressPage() {
             <Mail className="w-6 h-6 text-brand-500" />
           </div>
           <h2 className="font-display text-2xl font-bold text-gray-900 dark:text-white mb-3">Media Contact</h2>
-          <p className="text-gray-500 dark:text-gray-400 mb-6">For press inquiries, interviews, or speaking requests, please reach out directly.</p>
+          <p className="text-gray-500 dark:text-gray-500 mb-6">For press inquiries, interviews, or speaking requests, please reach out directly.</p>
           <div className="p-5 rounded-xl bg-white dark:bg-surface-800 border border-gray-100 dark:border-white/6 text-left space-y-2 mb-6">
-            <p className="text-sm"><span className="text-gray-400">Name:</span> <span className="text-gray-900 dark:text-white font-medium">Press Team, SaaSSkul</span></p>
-            <p className="text-sm"><span className="text-gray-400">Email:</span> <a href="mailto:press@saasskul.com" className="text-brand-500 hover:underline">press@saasskul.com</a></p>
-            <p className="text-sm"><span className="text-gray-400">Response time:</span> <span className="text-gray-900 dark:text-white font-medium">Within 24 hours</span></p>
+            <p className="text-sm"><span className="text-gray-500">Name:</span> <span className="text-gray-900 dark:text-white font-medium">Press Team, SaaSSkul</span></p>
+            <p className="text-sm"><span className="text-gray-500">Email:</span> <a href="mailto:press@saasskul.com" className="text-brand-500 hover:underline">press@saasskul.com</a></p>
+            <p className="text-sm"><span className="text-gray-500">Response time:</span> <span className="text-gray-900 dark:text-white font-medium">Within 24 hours</span></p>
           </div>
           <Link
             href="/contact"

@@ -34,7 +34,7 @@ export default function SignupPage() {
         </div>
 
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 p-8 shadow-xl shadow-black/5">
-          <Suspense fallback={<div className="h-96 flex items-center justify-center text-gray-400 text-sm">Loading...</div>}>
+          <Suspense fallback={<div className="h-96 flex items-center justify-center text-gray-500 text-sm">Loading...</div>}>
             <SignupForm />
           </Suspense>
         </div>

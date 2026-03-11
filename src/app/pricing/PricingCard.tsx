@@ -77,7 +77,7 @@ export default function PricingCard({ plan }: Props) {
             plan.highlighted ? 'text-white' : 'text-gray-900 dark:text-white')}>
             ${plan.price}
           </span>
-          <span className={cn('text-sm', plan.highlighted ? 'text-white/60' : 'text-gray-400')}>/month</span>
+          <span className={cn('text-sm', plan.highlighted ? 'text-white/80' : 'text-gray-500')}>/month</span>
         </div>
         <p className={cn('text-sm', plan.highlighted ? 'text-white/70' : 'text-gray-500 dark:text-gray-400')}>
           {plan.description}

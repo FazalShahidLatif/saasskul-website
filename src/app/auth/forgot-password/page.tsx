@@ -74,7 +74,7 @@ export default function ForgotPasswordPage() {
                 </p>
               </div>
               <div className="pt-2 flex flex-col gap-2">
-                <p className="text-xs text-gray-400">Didn&apos;t receive it? Check your spam folder or</p>
+                <p className="text-xs text-gray-500">Didn&apos;t receive it? Check your spam folder or</p>
                 <button
                   onClick={() => { setSent(false); setEmail('') }}
                   className="text-sm font-semibold text-brand-500 hover:underline"
@@ -90,7 +90,7 @@ export default function ForgotPasswordPage() {
                   Email address
                 </label>
                 <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                   <input
                     type="email"
                     value={email}

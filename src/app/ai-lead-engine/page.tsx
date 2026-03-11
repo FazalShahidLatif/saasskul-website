@@ -104,7 +104,7 @@ export default function AiLeadEnginePage() {
             The SaaSSkul{' '}
             <span className="gradient-text">AI Lead Engine</span>
           </h1>
-          <p className="text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-500 dark:text-gray-500 max-w-3xl mx-auto">
             A 4-step automated workflow that takes leads from first touch to booked appointment —
             without any manual intervention.
           </p>
@@ -137,10 +137,10 @@ export default function AiLeadEnginePage() {
                   <h2 className="font-display text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-2">
                     {step.title}
                   </h2>
-                  <p className="text-lg font-medium text-gray-400 dark:text-gray-500 mb-4">
+                  <p className="text-lg font-medium text-gray-500 dark:text-gray-500 mb-4">
                     {step.subtitle}
                   </p>
-                  <p className="text-gray-500 dark:text-gray-400 leading-relaxed mb-6">
+                  <p className="text-gray-500 dark:text-gray-500 leading-relaxed mb-6">
                     {step.description}
                   </p>
 
@@ -170,14 +170,14 @@ export default function AiLeadEnginePage() {
                         <p className="text-2xl font-extrabold font-display text-gray-900 dark:text-white">
                           {step.stats.value}
                         </p>
-                        <p className="text-xs text-gray-400 dark:text-gray-500">{step.stats.label}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-500">{step.stats.label}</p>
                       </div>
                     </div>
 
                     <h3 className={`font-display text-2xl font-bold ${colors.text} mb-2`}>
                       {step.title}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{step.subtitle}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-500">{step.subtitle}</p>
                   </div>
                 </div>
               </div>
@@ -187,14 +187,14 @@ export default function AiLeadEnginePage() {
 
         {/* Integration logos */}
         <div className="text-center mb-20">
-          <p className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-6">
+          <p className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-6">
             Integrates with your favorite tools
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             {['HubSpot', 'Salesforce', 'Pipedrive', 'Mailchimp', 'Calendly', 'Zoom', 'Slack', 'Zapier'].map((tool) => (
               <div
                 key={tool}
-                className="px-4 py-2.5 rounded-xl border border-gray-100 dark:border-white/6 bg-white dark:bg-surface-800 text-sm font-medium text-gray-500 dark:text-gray-400"
+                className="px-4 py-2.5 rounded-xl border border-gray-100 dark:border-white/6 bg-white dark:bg-surface-800 text-sm font-medium text-gray-500 dark:text-gray-500"
               >
                 {tool}
               </div>
@@ -211,7 +211,7 @@ export default function AiLeadEnginePage() {
             Start Your Free Trial
             <ArrowRight className="w-4 h-4" />
           </Link>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-3">
+          <p className="text-sm text-gray-500 dark:text-gray-500 mt-3">
             14-day trial · No credit card required
           </p>
         </div>
