@@ -148,16 +148,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {/* Google Analytics — replace G-XXXXXXXXXX with your Measurement ID */}
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${process.env.NEXT_PUBLIC_GA_ID}',{page_path:window.location.pathname});`,
-              }}
-            />
-          </>
-        )}
+        {/* Google Analytics G-RPBLRYT5L3 */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RPBLRYT5L3" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-RPBLRYT5L3',{page_path:window.location.pathname});`,
+          }}
+        />
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={true}>
