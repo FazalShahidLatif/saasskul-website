@@ -17,18 +17,29 @@ export default function ResetPasswordPage() {
   const router = useRouter()
 
   useEffect(() => {
-    // Check if we have a valid recovery session
     const supabase = supabaseBrowser()
-    supabase.auth.onAuthStateChange((event) => {
+
+    // Listen for PASSWORD_RECOVERY event FIRST (fires when hash token is parsed)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'PASSWORD_RECOVERY') {
+        setValidSession(true)
+      } else if (event === 'SIGNED_IN' && session) {
         setValidSession(true)
       }
     })
-    // Check existing session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) setValidSession(true)
-      else setValidSession(false)
-    })
+
+    // Give Supabase time to parse the hash fragment before checking session
+    const timer = setTimeout(() => {
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        // Only set false if still null (not already set to true by onAuthStateChange)
+        setValidSession(prev => prev === null ? Boolean(session) : prev)
+      })
+    }, 2000)
+
+    return () => {
+      subscription.unsubscribe()
+      clearTimeout(timer)
+    }
   }, [])
 
   const strength = password.length === 0 ? 0 : password.length < 6 ? 1 : password.length < 10 ? 2 : 3
@@ -78,7 +89,12 @@ export default function ResetPasswordPage() {
         </div>
 
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 p-8 shadow-xl shadow-black/5">
-          {success ? (
+          {validSession === null ? (
+            <div className="text-center py-8 space-y-3">
+              <div className="w-8 h-8 border-2 border-brand-500 border-t-transparent rounded-full animate-spin mx-auto" />
+              <p className="text-sm text-gray-500 dark:text-gray-400">Verifying reset link...</p>
+            </div>
+          ) : success ? (
             <div className="text-center py-4 space-y-4">
               <div className="w-14 h-14 rounded-full bg-brand-400/15 flex items-center justify-center mx-auto">
                 <CheckCircle className="w-7 h-7 text-brand-500" />
