@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import LoginForm from './LoginForm'
 import Link from 'next/link'
 import { Zap } from 'lucide-react'
+import { Suspense } from 'react'
 
 export const metadata: Metadata = {
   title: 'Login — SaaSSkul',
@@ -34,7 +35,9 @@ export default function LoginPage() {
         </div>
 
         <div className="bg-white dark:bg-surface-800 rounded-2xl border border-gray-100 dark:border-white/6 p-8 shadow-xl shadow-black/5">
-          <LoginForm />
+          <Suspense fallback={<div className="h-64 animate-pulse bg-gray-100 dark:bg-white/5 rounded-xl" />}>
+            <LoginForm />
+          </Suspense>
         </div>
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-5">
