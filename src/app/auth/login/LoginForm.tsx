@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff, Github } from 'lucide-react'
 import { supabaseBrowser, isSupabaseConfigured } from '@/lib/supabase'
@@ -15,6 +15,21 @@ export default function LoginForm() {
   const [oauthLoading, setOauthLoading] = useState<'google' | 'github' | null>(null)
   const [error, setError] = useState('')
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // Show error from OAuth callback redirect
+  useEffect(() => {
+    const urlError = searchParams.get('error')
+    if (urlError) {
+      if (urlError === 'server_not_configured') {
+        setError('Server not configured. Contact support at hello@saasskul.com')
+      } else if (urlError === 'callback_failed') {
+        setError('Sign in failed. Please try again.')
+      } else {
+        setError(decodeURIComponent(urlError))
+      }
+    }
+  }, [searchParams])
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,7 +48,6 @@ export default function LoginForm() {
       setLoading(false)
     } else {
       router.push('/dashboard')
-      router.refresh()
     }
   }
 
@@ -47,7 +61,10 @@ export default function LoginForm() {
     const supabase = supabaseBrowser()
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { access_type: 'offline', prompt: 'consent' },
+      },
     })
     if (error) {
       setError(error.message)
@@ -59,12 +76,19 @@ export default function LoginForm() {
     <div className="space-y-5">
       <AuthConfigBanner />
 
-      {/* OAuth buttons */}
+      {error && (
+        <div className="p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-sm text-red-400">
+          {error}
+        </div>
+      )}
+
+      {/* OAuth Buttons */}
       <div className="grid grid-cols-2 gap-3">
         <button
           type="button"
           onClick={() => handleOAuth('google')}
           disabled={oauthLoading !== null}
+          aria-label="Continue with Google"
           className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-gray-200 dark:border-white/8 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-60 transition-all"
         >
           {oauthLoading === 'google' ? (
@@ -83,6 +107,7 @@ export default function LoginForm() {
           type="button"
           onClick={() => handleOAuth('github')}
           disabled={oauthLoading !== null}
+          aria-label="Continue with GitHub"
           className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-gray-200 dark:border-white/8 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-60 transition-all"
         >
           {oauthLoading === 'github' ? (
@@ -94,29 +119,35 @@ export default function LoginForm() {
         </button>
       </div>
 
-      <div className="relative flex items-center">
-        <div className="flex-1 h-px bg-gray-100 dark:bg-white/6" />
-        <span className="px-3 text-xs text-gray-400 dark:text-gray-500">or continue with email</span>
-        <div className="flex-1 h-px bg-gray-100 dark:bg-white/6" />
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-100 dark:border-white/6" />
+        </div>
+        <div className="relative flex justify-center text-xs text-gray-400">
+          <span className="bg-white dark:bg-surface-800 px-3">or continue with email</span>
+        </div>
       </div>
 
       <form onSubmit={handleEmailLogin} className="space-y-4">
-        <div className="space-y-1.5">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Email</label>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+            Email
+          </label>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
             placeholder="you@company.com"
             required
-            autoComplete="email"
-            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/8 bg-white dark:bg-white/3 text-gray-900 dark:text-white text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all placeholder:text-gray-400"
+            aria-label="Email address"
+            className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all text-sm"
           />
         </div>
-
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between">
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">Password</label>
+        <div>
+          <div className="flex items-center justify-between mb-1.5">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              Password
+            </label>
             <Link href="/auth/forgot-password" className="text-xs text-brand-500 hover:underline">
               Forgot password?
             </Link>
@@ -125,40 +156,28 @@ export default function LoginForm() {
             <input
               type={showPassword ? 'text' : 'password'}
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={e => setPassword(e.target.value)}
               placeholder="••••••••"
               required
-              autoComplete="current-password"
-              className="w-full px-4 py-2.5 pr-10 rounded-xl border border-gray-200 dark:border-white/8 bg-white dark:bg-white/3 text-gray-900 dark:text-white text-sm outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-400/20 transition-all placeholder:text-gray-400"
+              aria-label="Password"
+              className="w-full px-4 py-2.5 rounded-xl border border-gray-200 dark:border-white/8 bg-gray-50 dark:bg-white/3 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500 transition-all text-sm pr-10"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? 'Hide password' : 'Show password'}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
           </div>
         </div>
-
-        {error && (
-          <div className="p-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 text-sm text-red-600 dark:text-red-400">
-            {error}
-          </div>
-        )}
-
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-brand-500 hover:bg-brand-400 disabled:opacity-60 text-white font-semibold rounded-xl transition-all shadow-lg shadow-brand-500/20"
+          className="w-full py-2.5 px-4 bg-brand-500 hover:bg-brand-600 text-black font-semibold rounded-xl transition-all disabled:opacity-60 text-sm"
         >
-          {loading ? (
-            <span className="flex items-center justify-center gap-2">
-              <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              Signing in...
-            </span>
-          ) : 'Sign in'}
+          {loading ? 'Signing in…' : 'Sign In'}
         </button>
       </form>
     </div>
