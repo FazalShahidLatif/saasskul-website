@@ -23,7 +23,7 @@ export const supabase = createClient(getUrl(), getKey())
 
 // Browser client factory (Client Components)
 export const supabaseBrowser = () => createClient(getUrl(), getKey(), {
-  auth: { persistSession: true, autoRefreshToken: true },
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
 })
 
 // Server client factory (Server Components / API Routes)

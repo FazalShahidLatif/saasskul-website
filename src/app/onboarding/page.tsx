@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { 
   Building2, Target, Zap, CheckCircle, ArrowRight, ArrowLeft,
@@ -95,6 +95,20 @@ export default function OnboardingPage() {
     crm: '',
     referral: '',
   })
+
+  // Detect session from URL hash (OAuth implicit flow redirects here)
+  useEffect(() => {
+    const supabase = supabaseBrowser()
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (!session) {
+        setTimeout(() => {
+          supabase.auth.getSession().then(({ data: { session: s } }) => {
+            if (!s) router.push('/auth/login')
+          })
+        }, 1500)
+      }
+    })
+  }, []) // eslint-disable-line
 
   const update = (key: keyof OnboardingData, value: any) =>
     setData(prev => ({ ...prev, [key]: value }))
